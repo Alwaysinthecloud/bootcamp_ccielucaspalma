@@ -1,5 +1,4 @@
 enable
-
 configure terminal
 hostname R9
 enable secret cisco
@@ -9,21 +8,38 @@ line vty 0 4
 password cisco
 login
  
+!Configuração das interfaces e criação das subinterfaces
 interface giga 0/1
-ip address 192.168.97.9 255.255.255.0
-no shutdown
+i p address 192.168.97.9 255.255.255.0
+ no shutdown
 interface giga 0/0/0
-ip address 192.168.98.9 255.255.255.0
-no shutdown
+ ip address 192.168.98.9 255.255.255.0
+ no shutdown
 interface giga 0/0.40
-encapsulation dot1Q 40
-ip address 192.168.40.1 255.255.255.0
-no shutdown
+ encapsulation dot1Q 40
+ ip address 192.168.40.1 255.255.255.0
+ no shutdown
 interface giga 0/0.50
-encapsulation dot1Q 50
-ip address 192.168.50.1 255.255.255.0
-no shutdown
-interface giga 0/0.99
-encapsulation dot1Q 99
-ip address 192.168.99.46 255.255.255.240
-no shutdown
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.0
+ no shutdown
+ interface giga 0/0.99
+ encapsulation dot1Q 99 native
+ ip address 192.168.99.46 255.255.255.240
+ no shutdown
+
+
+! Criação de pool de IP e DHCP server
+ip dhcp excluded-address 192.168.40.1
+ip dhcp excluded-address 192.168.50.1
+ip dhcp pool VLAN40
+ network 192.168.40.0 255.255.255.0
+ default-router 192.168.40.1
+ip dhcp pool VLAN50
+ network 192.168.50.0 255.255.255.0
+ default-router 192.168.50.1
+
+! Configurações de roteamento dinâmico OSPF
+router ospf 1
+ network 192.168.0.0 0.0.255.255 area 0
+ 

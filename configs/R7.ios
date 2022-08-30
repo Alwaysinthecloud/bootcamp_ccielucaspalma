@@ -18,3 +18,8 @@ no shutdown
 interface giga 0/2
 ip address 200.200.200.7 255.255.255.0
 no shutdown
+
+! Configurações de roteamento dinâmico OSPF
+router ospf 1
+ default-information originate
+ network 192.168.0.0 0.0.255.255 area 0
