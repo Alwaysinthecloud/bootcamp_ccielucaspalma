@@ -1,0 +1,33 @@
+enable
+
+configure terminal
+hostname SW3
+enable secret cisco
+
+line vty 0 4
+password cisco
+login
+
+vlan 10
+name FL1
+vlan 20 
+name FL2
+vlan 99
+name management
+
+interface fast 0/1
+switchport mode trunk
+interface fast 0/2
+switchport mode trunk
+
+interface fast 0/3
+switchport mode access
+switchport access vlan 10
+
+interface fast 0/4
+switchport mode access
+switchport access vlan 20
+
+interface vlan 99
+ip address 192.168.99.3 255.255.255.240
+no shutdown

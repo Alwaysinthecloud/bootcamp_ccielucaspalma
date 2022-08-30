@@ -1,0 +1,32 @@
+enable
+
+configure terminal
+hostname SW5
+enable secret cisco
+
+line vty 0 4
+password cisco
+login
+
+vlan 40
+name BDG4
+vlan 50
+name BDG5
+vlan 99
+name management
+
+interface fast 0/3
+switchport mode trunk
+switchport trunk native vlan 99
+
+interface fast 0/1
+switchport mode access
+switchport access vlan 40
+
+interface fast 0/2
+switchport mode access
+switchport access vlan 50
+
+interface vlan 99
+ip address 192.168.99.33 255.255.255.240
+no shutdown

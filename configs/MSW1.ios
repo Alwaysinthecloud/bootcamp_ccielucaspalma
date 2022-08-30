@@ -1,0 +1,37 @@
+enable
+
+configure terminal
+hostname MSW1
+enable secret cisco
+
+line vty 0 4
+password cisco
+login
+
+vlan 10
+name FL1
+vlan 20 
+name FL2
+vlan 99
+name management
+
+interface fast 0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+interface fast 0/2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface fast 0/1 
+no switchport
+ip address 192.168.81.1 255.255.255.0
+no shutdown
+interface vlan 10
+ip address 192.168.10.1 255.255.255.0
+no shutdown
+interface vlan 20
+ip address 192.168.20.1 255.255.255.0
+no shutdown
+interface vlan 99
+ip address 192.168.99.1 255.255.255.240
+no shutdown

@@ -1,0 +1,29 @@
+enable
+
+configure terminal
+hostname R9
+enable secret cisco
+
+!Posteriormente a configuração será alterada para SSH
+line vty 0 4
+password cisco
+login
+ 
+interface giga 0/1
+ip address 192.168.97.9 255.255.255.0
+no shutdown
+interface giga 0/0/0
+ip address 192.168.98.9 255.255.255.0
+no shutdown
+interface giga 0/0.40
+encapsulation dot1Q 40
+ip address 192.168.40.1 255.255.255.0
+no shutdown
+interface giga 0/0.50
+encapsulation dot1Q 50
+ip address 192.168.50.1 255.255.255.0
+no shutdown
+interface giga 0/0.99
+encapsulation dot1Q 99
+ip address 192.168.99.46 255.255.255.240
+no shutdown

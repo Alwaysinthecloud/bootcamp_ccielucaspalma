@@ -1,0 +1,20 @@
+enable
+
+configure terminal
+hostname R7
+enable secret cisco
+
+!Posteriormente a configuração será alterada para SSH
+line vty 0 4
+password cisco
+login
+ 
+interface giga 0/1
+ip address 192.168.87.7 255.255.255.0
+no shutdown
+interface giga 0/0
+ip address 192.168.97.7 255.255.255.0
+no shutdown
+interface giga 0/2
+ip address 200.200.200.7 255.255.255.0
+no shutdown
