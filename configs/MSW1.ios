@@ -1,5 +1,4 @@
 enable
-
 configure terminal
 hostname MSW1
 enable secret cisco
